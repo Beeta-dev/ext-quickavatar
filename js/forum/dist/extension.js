@@ -25,11 +25,12 @@ System.register('beeta-dev/ext-quickavatar/components/QuickAvatar', ['flarum/Com
                 }, {
                     key: 'view',
                     value: function view() {
-                        return m('div', {
+                        return m('button', {
                             className: 'Button hasIcon beeta-quickavatar Button--icon',
-                            icon: 'bolt',
-                            onclick: this.onclick.bind(this)
-                        }, "Quick Avatar");
+                            onclick: function onclick() {
+                                this.onclick.bind(this);
+                            }
+                        }, '<i class="icon fa fa-fw fa-bolt Button-icon"></i><span class="button-label">Quick Avatar</span>');
                     }
                 }, {
                     key: 'onclick',
@@ -70,9 +71,11 @@ System.register('beeta-dev/ext-quickavatar/main', ['flarum/extend', 'flarum/app'
         execute: function () {
 
             app.initializers.add('beeta-quickavatar', function () {
-                extend(TextEditor.prototype, 'controlItems', function (items) {
+                var quickAvatar;
+                extend(TextEditor.prototype, 'controlItems', function () {
                     var quickAvatar = new QuickAvatar();
                     quickAvatar.textAreaObj = this;
+                    quickAvatar.include.push('quickAvatar');
                 });
                 extend(Post.prototype, 'actionItems', function (items) {
                     items.add('beeta-quickavatar', quickAvatar, 5);

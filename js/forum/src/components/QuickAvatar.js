@@ -8,11 +8,10 @@ export default class QuickAvatar extends Component {
     }
 
     view() {
-        return m('div', {
+        return m('button', {
             className: 'Button hasIcon beeta-quickavatar Button--icon',
-            icon: 'bolt',
-            onclick: this.onclick.bind(this)
-        },"Quick Avatar");
+            onclick: function() { this.onclick.bind(this); }
+        },'<i class="icon fa fa-fw fa-bolt Button-icon"></i><span class="button-label">Quick Avatar</span>');
     }
 
     onclick(image) {
