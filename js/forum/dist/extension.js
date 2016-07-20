@@ -72,7 +72,7 @@ System.register('beeta-dev/ext-quickavatar/main', ['flarum/extend', 'flarum/app'
         execute: function () {
 
             app.initializers.add('beeta-quickavatar', function () {
-                extend(Post.prototype, 'actionItems', function (items) {
+                extend(TextEditor.prototype, 'controlItems', function (items) {
 
                     var quickAvatar = new QuickAvatar();
                     quickAvatar.textAreaObj = this;
@@ -89,8 +89,8 @@ System.register('beeta-dev/ext-quickavatar/main', ['flarum/extend', 'flarum/app'
                 });
 
                 extend(Post.prototype, 'footerItems', function (items) {
-                    var user = this.props.user;
-                    items.add("assinatura", user.bio());
+                    //var user = this.props.user;
+                    items.add("assinatura", 'Assinatura');
                 });
             });
         }

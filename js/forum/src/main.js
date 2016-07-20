@@ -7,7 +7,7 @@ import Button from 'flarum/components/Button';
 import QuickAvatar from 'beeta-dev/ext-quickavatar/components/QuickAvatar';
 
 app.initializers.add('beeta-quickavatar', () => {
-    extend(Post.prototype, 'actionItems', function(items) {
+    extend(TextEditor.prototype, 'controlItems', function(items) {
 
         var quickAvatar = new QuickAvatar;
         quickAvatar.textAreaObj = this;
@@ -24,7 +24,7 @@ app.initializers.add('beeta-quickavatar', () => {
     });
 
     extend(Post.prototype, 'footerItems', function(items) {
-        var user = this.props.user;
-        items.add("assinatura",user.bio());
+        //var user = this.props.user;
+        items.add("assinatura",'Assinatura');
     });
 });
