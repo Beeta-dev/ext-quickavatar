@@ -5,14 +5,18 @@ import TextEditor from 'flarum/components/TextEditor'
 export default class QuickAvatar extends Component {
 
     init() {
+        var TextEditor = new TextEditor;
         this.textAreaObj = TextEditor;
     }
 
     view() {
         return m('button', {
-            className: 'Button hasIcon beeta-quickavatar Button--icon',
-            onclick: function() { this.onclick.bind(this); }
-        },'Quick Avatar');
+            className: 'Button beeta-quickavatar hasIcon',
+            onclick: function() { this.onclick.bind(this); } },
+            [
+                m('i', {className: 'icon fa fa-fw fa-bolt Button-icon'}, ''),
+                m('span', {className: 'button-label'}, 'Quick Avatar')
+            ]);
     }
     //<i class="icon fa fa-fw fa-bolt Button-icon"></i><span class="button-label">Quick Avatar</span>
 

@@ -22,17 +22,17 @@ System.register('beeta-dev/ext-quickavatar/components/QuickAvatar', ['flarum/Com
                 babelHelpers.createClass(QuickAvatar, [{
                     key: 'init',
                     value: function init() {
+                        var TextEditor = new TextEditor();
                         this.textAreaObj = TextEditor;
                     }
                 }, {
                     key: 'view',
                     value: function view() {
                         return m('button', {
-                            className: 'Button hasIcon beeta-quickavatar Button--icon',
+                            className: 'Button beeta-quickavatar hasIcon',
                             onclick: function onclick() {
                                 this.onclick.bind(this);
-                            }
-                        }, 'Quick Avatar');
+                            } }, [m('i', { className: 'icon fa fa-fw fa-bolt Button-icon' }, ''), m('span', { className: 'button-label' }, 'Quick Avatar')]);
                     }
 
                     //<i class="icon fa fa-fw fa-bolt Button-icon"></i><span class="button-label">Quick Avatar</span>
