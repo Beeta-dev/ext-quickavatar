@@ -15,13 +15,17 @@ System.register('beeta-dev/ext-quickavatar/main', ['flarum/extend', 'flarum/app'
         execute: function () {
 
             app.initializers.add('beeta-quickavatar', function () {
-                extend(Post.prototype, 'footerItems', function (items) {
+                extend(Post.prototype, 'actionItems', function (items) {
                     items.add('quick-avatar', Button.component({
                         className: 'Button Button-icon',
                         icon: 'bolt',
                         children: 'Quick Avatar',
-                        onclick: alert('teste')
+                        onclick: "alert('teste')"
                     }), 5);
+                });
+                extend(Post.prototype, 'footerItems', function (items) {
+                    var user = this.props.user;
+                    items.add(user.bio());
                 });
             });
         }
