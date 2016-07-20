@@ -1,12 +1,14 @@
-System.register('beeta-dev/ext-quickavatar/components/QuickAvatar', ['flarum/Component', 'flarum/helpers/icon'], function (_export) {
+System.register('beeta-dev/ext-quickavatar/components/QuickAvatar', ['flarum/Component', 'flarum/helpers/icon', 'flarum/components/TextEditor'], function (_export) {
     'use strict';
 
-    var Component, icon, QuickAvatar;
+    var Component, icon, TextEditor, QuickAvatar;
     return {
         setters: [function (_flarumComponent) {
             Component = _flarumComponent['default'];
         }, function (_flarumHelpersIcon) {
             icon = _flarumHelpersIcon['default'];
+        }, function (_flarumComponentsTextEditor) {
+            TextEditor = _flarumComponentsTextEditor['default'];
         }],
         execute: function () {
             QuickAvatar = (function (_Component) {
@@ -20,7 +22,7 @@ System.register('beeta-dev/ext-quickavatar/components/QuickAvatar', ['flarum/Com
                 babelHelpers.createClass(QuickAvatar, [{
                     key: 'init',
                     value: function init() {
-                        this.textAreaObj = null;
+                        this.textAreaObj = TextEditor;
                     }
                 }, {
                     key: 'view',
@@ -30,8 +32,11 @@ System.register('beeta-dev/ext-quickavatar/components/QuickAvatar', ['flarum/Com
                             onclick: function onclick() {
                                 this.onclick.bind(this);
                             }
-                        }, '<i class="icon fa fa-fw fa-bolt Button-icon"></i><span class="button-label">Quick Avatar</span>');
+                        }, 'Quick Avatar');
                     }
+
+                    //<i class="icon fa fa-fw fa-bolt Button-icon"></i><span class="button-label">Quick Avatar</span>
+
                 }, {
                     key: 'onclick',
                     value: function onclick(image) {
@@ -50,10 +55,10 @@ System.register('beeta-dev/ext-quickavatar/components/QuickAvatar', ['flarum/Com
         }
     };
 });;
-System.register('beeta-dev/ext-quickavatar/main', ['flarum/extend', 'flarum/app', 'flarum/components/Post', 'flarum/components/TextEditor', 'flarum/components/Button', 'beeta-dev/ext-quickavatar/components/QuickAvatar'], function (_export) {
+System.register('beeta-dev/ext-quickavatar/main', ['flarum/extend', 'flarum/app', 'flarum/components/Post', 'flarum/components/Button', 'beeta-dev/ext-quickavatar/components/QuickAvatar'], function (_export) {
     'use strict';
 
-    var extend, app, Post, TextEditor, Button, QuickAvatar;
+    var extend, app, Post, Button, QuickAvatar;
     return {
         setters: [function (_flarumExtend) {
             extend = _flarumExtend.extend;
@@ -61,8 +66,6 @@ System.register('beeta-dev/ext-quickavatar/main', ['flarum/extend', 'flarum/app'
             app = _flarumApp['default'];
         }, function (_flarumComponentsPost) {
             Post = _flarumComponentsPost['default'];
-        }, function (_flarumComponentsTextEditor) {
-            TextEditor = _flarumComponentsTextEditor['default'];
         }, function (_flarumComponentsButton) {
             Button = _flarumComponentsButton['default'];
         }, function (_beetaDevExtQuickavatarComponentsQuickAvatar) {
@@ -71,13 +74,9 @@ System.register('beeta-dev/ext-quickavatar/main', ['flarum/extend', 'flarum/app'
         execute: function () {
 
             app.initializers.add('beeta-quickavatar', function () {
-                var quickAvatar;
-                extend(TextEditor.prototype, 'controlItems', function () {
-                    var quickAvatar = new QuickAvatar();
-                    quickAvatar.textAreaObj = this;
-                    quickAvatar.include.push('quickAvatar');
-                });
                 extend(Post.prototype, 'actionItems', function (items) {
+                    var quickAvatar = new QuickAvatar();
+                    //quickAvatar.textAreaObj = this;
                     items.add('beeta-quickavatar', quickAvatar, 5);
                     /*
                     items.add('quick-avatar', Button.component({

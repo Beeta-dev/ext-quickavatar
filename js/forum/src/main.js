@@ -1,19 +1,14 @@
 import { extend } from 'flarum/extend';
 import app from 'flarum/app';
 import Post from 'flarum/components/Post'
-import TextEditor from 'flarum/components/TextEditor'
 import Button from 'flarum/components/Button';
 
 import QuickAvatar from 'beeta-dev/ext-quickavatar/components/QuickAvatar';
 
 app.initializers.add('beeta-quickavatar', () => {
-    var quickAvatar;
-    extend(TextEditor.prototype, 'controlItems', function() {
-        var quickAvatar = new QuickAvatar;
-        quickAvatar.textAreaObj = this;
-        quickAvatar.include.push('quickAvatar');
-    });
     extend(Post.prototype, 'actionItems', function(items) {
+        var quickAvatar = new QuickAvatar;
+        //quickAvatar.textAreaObj = this;
         items.add('beeta-quickavatar', quickAvatar, 5);
         /*
         items.add('quick-avatar', Button.component({
