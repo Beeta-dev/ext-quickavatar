@@ -8,11 +8,11 @@ import QuickAvatar from 'beeta-dev/ext-quickavatar/components/QuickAvatar';
 
 app.initializers.add('beeta-quickavatar', () => {
     extend(TextEditor.prototype, 'controlItems', function(items) {
-
         var quickAvatar = new QuickAvatar;
         quickAvatar.textAreaObj = this;
+    });
+    extend(Post.prototype, 'actionItems', function(items) {
         items.add('beeta-quickavatar', quickAvatar, 5);
-
         /*
         items.add('quick-avatar', Button.component({
             className: 'Button Button-icon',
@@ -22,7 +22,6 @@ app.initializers.add('beeta-quickavatar', () => {
         }), 5);
         */
     });
-
     extend(Post.prototype, 'footerItems', function(items) {
         //var user = this.props.user;
         items.add("assinatura",'Assinatura');

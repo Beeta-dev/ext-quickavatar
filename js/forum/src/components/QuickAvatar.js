@@ -11,13 +11,11 @@ export default class QuickAvatar extends Component {
         return m('div', {
             className: 'Button hasIcon beeta-quickavatar Button--icon',
             icon: 'bolt',
-            children: 'Quick Avatar',
             onclick: this.onclick.bind(this)
-        });
+        },"Quick Avatar");
     }
 
     onclick(image) {
-
         var link = 'avatar';
         var markdownString = '\n![image ' + link + '](' + link + ')\n';
         this.textAreaObj.insertAtCursor(markdownString);

@@ -28,14 +28,12 @@ System.register('beeta-dev/ext-quickavatar/components/QuickAvatar', ['flarum/Com
                         return m('div', {
                             className: 'Button hasIcon beeta-quickavatar Button--icon',
                             icon: 'bolt',
-                            children: 'Quick Avatar',
                             onclick: this.onclick.bind(this)
-                        });
+                        }, "Quick Avatar");
                     }
                 }, {
                     key: 'onclick',
                     value: function onclick(image) {
-
                         var link = 'avatar';
                         var markdownString = '\n![image ' + link + '](' + link + ')\n';
                         this.textAreaObj.insertAtCursor(markdownString);
@@ -73,11 +71,11 @@ System.register('beeta-dev/ext-quickavatar/main', ['flarum/extend', 'flarum/app'
 
             app.initializers.add('beeta-quickavatar', function () {
                 extend(TextEditor.prototype, 'controlItems', function (items) {
-
                     var quickAvatar = new QuickAvatar();
                     quickAvatar.textAreaObj = this;
+                });
+                extend(Post.prototype, 'actionItems', function (items) {
                     items.add('beeta-quickavatar', quickAvatar, 5);
-
                     /*
                     items.add('quick-avatar', Button.component({
                         className: 'Button Button-icon',
@@ -87,7 +85,6 @@ System.register('beeta-dev/ext-quickavatar/main', ['flarum/extend', 'flarum/app'
                     }), 5);
                     */
                 });
-
                 extend(Post.prototype, 'footerItems', function (items) {
                     //var user = this.props.user;
                     items.add("assinatura", 'Assinatura');
