@@ -1,26 +1,23 @@
 import { extend } from 'flarum/extend';
 import app from 'flarum/app';
 import Post from 'flarum/components/Post'
-import Button from 'flarum/components/Button';
 
 import QuickAvatar from 'beeta-dev/ext-quickavatar/components/QuickAvatar';
 
-app.initializers.add('beeta-quickavatar', () => {
+app.initializers.add('beeta-quickavatar', app => {
     extend(Post.prototype, 'actionItems', function(items) {
         var quickAvatar = new QuickAvatar;
-        //quickAvatar.textAreaObj = this;
-        items.add('beeta-quickavatar', quickAvatar, 5);
-        /*
-        items.add('quick-avatar', Button.component({
-            className: 'Button Button-icon',
-            icon: 'bolt',
-            children: 'Quick Avatar',
-            onclick: "alert('teste')"
-        }), 5);
-        */
-    });
-    extend(Post.prototype, 'footerItems', function(items) {
-        //var user = this.props.user;
-        items.add("assinatura",'Assinatura');
+        quickAvatar.id = this.props.post.data.id;
+        quickAvatar.content = this.props.post.data.attributes.content;
+        quickAvatar.discussionId = this.props.post.data.relationships.discussion.data.id;
+        quickAvatar.discussion = this.props.post.store.data.discussions[quickAvatar.discussionId];
+        quickAvatar.userId = this.props.post.data.relationships.user.data.id;
+        quickAvatar.username = this.props.post.store.data.users[quickAvatar.userId].data.attributes.username;
+        quickAvatar.avatarUrl = this.props.post.store.data.users[quickAvatar.userId].data.attributes.avatarUrl;
+        items.add('beeta-quickavatar',
+            !app.session.user
+            ? ""
+            : quickAvatar
+            , 5);
     });
 });
