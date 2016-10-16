@@ -56,7 +56,7 @@ System.register('beeta-dev/ext-quickavatar/components/QuickAvatar', ['flarum/Com
                             } else {
                                 newContent = newContent;
                             }
-                            app.composer.minimize();
+                            //app.composer.minimize();
                             e.stopPropagation();
                             textarea.val(newContent).trigger('input');
                             var pos = newContent.length;

@@ -1,6 +1,6 @@
 {
     "name": "beeta-dev/ext-quickavatar",
-    "description": "Beeta Quiack Avatar",
+    "description": "Beeta Quick Avatar",
     "type": "flarum-extension",
     "authors": [{
         "name": "blurkness",
